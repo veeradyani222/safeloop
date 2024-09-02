@@ -1,0 +1,204 @@
+/* Cart Item Styles */
+.cart-items {
+    width: 90vw;
+    margin: 2vh auto;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f9f9f9;
+    border-radius: 1vh;
+    box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.1);
+    padding: 2vh;
+}
+
+.cartitems-main-format {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 0.8fr;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1vw;
+    padding: 1vh 0;
+    background-color: #eee;
+    border-radius: 0.5vh;
+}
+
+.cartitems-main-format p {
+    margin: 0;
+}
+
+hr {
+    border: 0;
+    height: 0.1vh;
+    background: #ddd;
+    margin: 1vh 0;
+}
+
+.cartitems-format {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 0.8fr;
+    align-items: center;
+    text-align: center;
+    padding: 1.5vh 0;
+    border-bottom: 0.1vh solid #ddd;
+}
+
+.cartitems-format img.carticon-product-icon {
+    max-width: 5vw; /* Reduce image size */
+    border-radius: 0.5vh;
+    display: block;
+    margin: 0 auto; /* Center image */
+}
+
+.item-name {
+    font-size: 14px; /* Reduce font size */
+    font-weight: 500;
+    color: #555;
+    text-align: center; /* Center item name */
+}
+
+.product-price, .cartitems-price {
+    font-size: 1.2vw;
+    color: #777;
+}
+
+.cartitems-quantity {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5vh 1vw;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    font-size: 1vw;
+}
+
+.cartitems-quantity:hover {
+    background-color: #0056b3;
+}
+
+/* Replace cross image with button */
+.remove-cartitems {
+    font-size: 14px; /* Reduce font size */
+    background-color: #dc3545; /* Red color for button */
+    color: white;
+    border: none;
+    padding: 0.5vh 1vw;
+    border-radius: 0.5vh;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    margin: 0 auto; /* Center button */
+}
+
+.remove-cartitems:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+/* Coupon Section */
+.coupon-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.coupon-input {
+    width: 70%;
+    padding: 8px;
+    font-size: 0.9em;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.coupon-input:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+.apply-coupon-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px; /* Margin between input and button */
+}
+
+.apply-coupon-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Cart Total Section */
+.cart-total {
+    font-size: 1.2em;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px; 
+    text-align: center;
+    margin-top: 5vh;
+}
+
+.buy-button {
+    padding: 10px 20px;
+    margin-top: 5vh;
+    font-size: 1.2em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+
+.buy-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+    .cart-items {
+        width: 100%;
+        padding: 1vh;
+    }
+
+    .cartitems-main-format {
+        display: none; /* Hide the heading container */
+    }
+    .product-price, .cartitems-price {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 10px;
+        color: #777;
+        font-weight: 800;
+    }
+    
+
+    .cartitems-format {
+        grid-template-columns: 1fr; /* Stack items vertically */
+        text-align: left;
+    }
+
+    .cartitems-format img.carticon-product-icon {
+        max-width: 30vw; /* Adjust image size for mobile */
+        margin: 0 auto;
+    }
+
+    .item-name {
+        font-size: 12px; /* Further reduce font size for mobile */
+    }
+
+    .cartitems-quantity {
+        font-size: 1em; 
+        padding: 0.5vh 0;
+    }
+}

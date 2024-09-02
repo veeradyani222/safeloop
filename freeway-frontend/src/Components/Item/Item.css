@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+  --first-color: #AFDBF5;
+  --second-color: #1da1f2;
+  --third-color: #00008B;
+  --fourth-color: #191970;
+  --fifth-color: #1E90FF;
+  --sixth-color: #318CE7;
+}
+
+.item {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+p.item_name {
+  font-family: "poppins", serif;
+  font-size: 2vh;
+  font-weight: 600;
+  text-align: center;
+}
+
+.item_prices {
+  display: flex;
+  flex-direction: row;
+  font-family: "poppins", serif;
+  justify-content: space-around;
+  font-size: 3vh;
+  font-weight: 600;
+  align-items: center;
+  gap: 1vw;
+}
+
+.old_price {
+  font-size: 3vh;
+  color: gray;
+  justify-content: center;
+  align-items: center;
+  text-decoration: line-through;
+  text-decoration-color: black;
+}
+
+.other_details_items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.wish_list {
+  font-size: 5vh;
+}
+
+.item img {
+  width: 25vw;
+  height: 30vw;
+}
+
+@media screen and (max-width:480px){
+  .item {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  p.item_name {
+    font-family: "poppins", serif;
+    font-size: 2vw;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  .item_prices {
+   
+    font-size: 2vh;
+    
+  }
+  
+  .old_price {
+    font-size: 1vh;
+  }
+
+  .item img {
+    width: 35vw;
+    height: 40vw;
+  }
+  
+  
+  
+  
+}

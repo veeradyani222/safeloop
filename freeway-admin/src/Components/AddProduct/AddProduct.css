@@ -1,0 +1,201 @@
+.add-product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Poppins', sans-serif;
+  /* background-color: #f9f9f9; */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+  border-radius: 1rem;
+  max-width: 800px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.heading {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: center;
+  font-weight: 600;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-field, .category-field {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: #f8f8f8;
+  transition: border-color 0.3s;
+}
+
+.input-field:focus, .category-field:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.description-field {
+  height: 150px;
+  resize: vertical;
+  padding: 1rem;
+}
+
+.submit-button {
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.submit-button:active {
+  background-color: #004494;
+  transform: translateY(1px);
+}
+.custom-file-upload img {
+  display: flex;
+  padding: 1rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  text-align: center;
+  width: 20vw;
+  height: 30vh;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.custom-file-upload img:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none; /* Hide the actual file input */
+}
+
+
+@media screen and (max-width:480px){
+
+  
+  .heading {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+    text-align: center;
+    font-weight: 600;
+  }
+  
+  .add-product-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-field, .category-field {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #f8f8f8;
+    transition: border-color 0.3s;
+  }
+  
+  .input-field:focus, .category-field:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .description-field {
+    height: 150px;
+    resize: vertical;
+    padding: 1rem;
+  }
+  
+  .submit-button {
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+  }
+  
+  .submit-button:active {
+    background-color: #004494;
+    transform: translateY(1px);
+  }
+  .custom-file-upload img {
+    display: flex;
+    padding: 1rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    width: 20vw;
+    height: 30vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .custom-file-upload img:hover {
+    background-color: #0056b3;
+  }
+  
+  .file-input {
+    display: none; /* Hide the actual file input */
+  }
+  
+  
+}

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.banner{
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.ShopCategory_index_sort{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vh;
+    font-weight: 700;
+    font-family: "poppins",serif;
+}
+
+.ShopCategory_sort{
+    display: flex;
+    font-family: "poppins",serif;
+    font-size: 4vh;
+    font-weight: 600;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+}
+.ShopCategory_products{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    gap: 5vw;
+    margin-top: 5vh;
+}
+
+
+
+.ShopCategory{
+    
+    padding-bottom: 10vh;
+}
+
+@media screen and (max-width:480px) {
+
+    .banner{
+        margin-top: 2vh;
+        width: 100%; 
+    }
+    
+    
+    .ShopCategory_index_sort{
+       margin-top: 5vh;
+        font-size: 3vh;
+        
+    }
+    
+    .ShopCategory_sort{ 
+        font-size: 2vh;
+       
+    }
+    .ShopCategory_products{
+       
+        grid-template-columns: repeat(2, 1fr); /* 3 columns with equal width */
+        
+    }
+    
+    
+    
+    .ShopCategory{
+        
+        padding-bottom: 10vh;
+    }
+    
+}

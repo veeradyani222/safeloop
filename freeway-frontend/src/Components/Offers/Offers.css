@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --first-color:#AFDBF5;
+    --second-color:#1da1f2;
+    --third-color:#00008B;
+    --fourth-color:#191970;
+    --fifth-color:#1E90FF;
+    --sixth-color:#318CE7;
+    }
+
+
+.offer_heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "poppins" , serif;
+    font-size: 3vh;
+    padding-top: 10vh;
+    color: var(--third-color);
+
+}
+
+.offer_page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.offers_top img{
+    height: 50vh;
+}
+
+
+.offers_bottom{
+    padding: 3vh 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "poppins", serif;
+    color: var(--third-color);
+}
+
+.promo_code{
+    width: 70vw;
+    text-align: center;
+    border: 3px solid black;
+    font-size: 5vh;
+    font-family: "poppins",serif;
+    font-weight: 800;
+    color: black;
+}
+
+.offers_bottom button{
+    padding: 2vh;
+    margin-top: 1vh;
+    font-family: "poppins" , serif;
+    font-size: 3vh;
+    font-weight: 800;
+    color: black;
+    background-color: var(--first-color);
+    border:2px solid black;
+    border-radius: 30vh;
+    margin-top: 5vh;
+}
+
+@media screen and (max-width:480px){
+
+    .offer_heading{
+       
+        font-size: 2vh;
+        text-align: center;
+        padding-top: 5vh;
+       
+    
+    }
+    
+    .offer_page{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    
+    .offers_top img{
+        height: 25vh;
+    }
+    
+    
+    .offers_bottom{
+      font-size: 2vh;
+      padding: 4vh 4vh;
+        align-items: center;
+        text-align: center;
+       
+    }
+    
+    .promo_code{
+      margin-top: 2vh;
+        font-size: 3vh;
+        
+    }
+    
+    .offers_bottom button{
+        padding: 2vh;
+        margin-top: 1vh;
+        font-family: "poppins" , serif;
+        font-size: 3vh;
+        font-weight: 800;
+        color: black;
+        background-color: var(--first-color);
+        border:2px solid black;
+        border-radius: 30vh;
+        margin-top: 5vh;
+    }
+    
+    
+    
+    
+}

@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Cedarville+Cursive&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+--first-color:#AFDBF5;
+--second-color:#1da1f2;
+--third-color:#00008B;
+--fourth-color:#191970;
+--fifth-color:#1E90FF;
+--sixth-color:#318CE7;
+}
+
+.LoginSignup , .LoginSignupContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.LoginSignupContainer h1{
+    margin-top: 20vh;
+    font-size: 50px;
+    font-family:  "Bungee Tint", sans-serif;
+    font-weight: 500;
+    color: var(--third-color);}
+
+
+    .LoginSignupFields{
+        margin-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    .LoginSignupFields input {
+         width: 70vw;
+        font-size: 20px;
+        font-family: "poppins",serif;
+        font-weight: 400;
+        color: black;
+        text-align: center;
+    }
+
+    .LoginSignupContainer button{
+        font-size: 20px;
+        font-family: "poppins",serif;
+        font-weight: 800;
+        margin-top: 5vh;
+        background-color: var(--first-color);
+        padding: 2vh;
+        border: 2px solid goldenrod;
+        color: var(--fourth-color);
+    }
+
+    .LoginSignup_Login{
+        font-family: "poppins", serif;
+        font-size: 3.0vh;
+        margin-top: 5vh;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .LoginSignup_Login span{
+        text-decoration: underline;
+    }
+
+    .LoginSignup_Agreement{
+        display: flex;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        font-family: "poppins", serif;
+        font-size: 2vh;
+        font-weight: 600;
+        gap: 3px;
+    }
+
+
+    @media screen and (max-width:480px) {
+
+        .LoginSignup , .LoginSignupContainer{
+          gap: 2vh;
+            width: 100%;
+        
+        }
+        .LoginSignupContainer h1{
+            margin-top: 10vh;
+            font-size: 20px;
+            
+            }
+        
+        
+            .LoginSignupFields{
+                margin-top: 7vh;
+              width:70%;
+              gap:3vh;
+                
+            }
+        
+            .LoginSignupFields input {
+                 width: 70vw;
+                font-size: 20px;
+               
+            }
+        
+            .LoginSignupContainer button{
+                font-size: 30px;
+                
+            }
+        
+            .LoginSignup_Login{
+                font-family: "poppins", serif;
+                font-size: 3.0vh;
+                margin-top: 5vh;
+                font-weight: 600;
+                text-align: center;
+            }
+        
+            
+        
+            .LoginSignup_Agreement{
+                
+                font-size: 2vh;
+               
+            }
+        
+    }

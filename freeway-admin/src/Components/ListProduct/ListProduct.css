@@ -1,0 +1,115 @@
+/* Main Product List Styles */
+.list-product {
+  width: 90vw;
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.list-product-head {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 2fr 1fr 1fr 1fr;
+  text-align: center;
+  font-weight: 600;
+  font-size: 2vh;
+  padding: 1vh 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.list-product-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.list-product-format-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 2fr 1fr 1fr 1fr;
+  align-items: center;
+  text-align: center;
+  font-size: 1.8vh;
+  padding: 1vh 0; /* Reduced padding */
+  border-bottom: 1px solid #ddd;
+}
+
+.list-product-format img {
+  max-width: 6vw;
+  max-height: 6vh;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+.list-product-format button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.list-product-format button img {
+  max-width: 2.5vw;
+  max-height: 2.5vh;
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ddd;
+  margin: 0;
+}
+
+/* Old Price Styling */
+.product-old-price {
+  font-size: 1.6vh; /* Adjust font size */
+  color: #777;
+  text-decoration: line-through; /* Line through old price */
+  margin-right: 1vw; /* Adjust space between old and new price */
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 480px) {
+  .list-product-head {
+      display: none; /* Hide heading container on small screens */
+  }
+
+  .list-product-format-main {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 1.6vh; /* Adjust font size for readability */
+      padding: 0.5vh 0; /* Reduced padding */
+  }
+
+  .list-product-format {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      padding: 1vh 0;
+      border-bottom: 1px solid #ddd;
+  }
+
+  .list-product-format img {
+      max-width: 80%; /* Ensure images are responsive and centered */
+      margin: 0 auto;
+  }
+
+  .list-product-format button {
+      padding: 0.3vh 0.8vw; /* Adjust padding for buttons */
+  }
+
+  .list-product-format button img {
+      max-width: 3vw; /* Adjust image size inside buttons */
+  }
+
+  .list-product-format .item-name {
+      font-size: 1.4vh; /* Reduce font size for item names */
+  }
+
+  .list-product-format .product-price {
+      font-size: 1.4vh; /* Reduce font size for product prices */
+  }
+
+  .product-old-price {
+      font-size: 1.4vh; /* Reduce font size for old price on small screens */
+      margin-right: 0.5vw; /* Adjust space between old and new price */
+  }
+}

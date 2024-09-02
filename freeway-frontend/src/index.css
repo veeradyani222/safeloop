@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+  }
+  body{
+    overflow-x: hidden;
+    padding: 2vh 2vh;
+  }
