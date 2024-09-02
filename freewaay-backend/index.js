@@ -13,6 +13,9 @@ app.use(cors());
 // MongoDB connection
 mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority');
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../freeway-frontend/build')));
+
 app.get("/", (req, res) => {
     res.send("Express app is running");
 });
@@ -50,11 +53,9 @@ const Product = mongoose.model("Product", new mongoose.Schema({
 
 app.post('/addproduct', async (req, res) => {
     try {
-        // Get the next id in a more robust way
         const lastProduct = await Product.findOne({}, {}, { sort: { id: -1 } });
         const id = lastProduct ? lastProduct.id + 1 : 1;
 
-        // Create a new product with the calculated ID
         const product = new Product({
             id: id,
             name: req.body.name,
@@ -67,7 +68,6 @@ app.post('/addproduct', async (req, res) => {
 
         console.log("Product to be saved:", product);
 
-        // Save the product to the database
         await product.save();
 
         res.json({
@@ -182,7 +182,6 @@ app.get('/newcollections', async (req, res) => {
 app.get('/popularnow', async (req, res) => {
     try {
         let products = await Product.find({});
-        // Shuffle the array and take the first 6 items
         let popular_now = products.sort(() => 0.5 - Math.random()).slice(0, 6);
         res.send(popular_now);
     } catch (error) {
@@ -235,6 +234,11 @@ app.post('/removefromcart', fetchUser, async (req, res) => {
 app.get('/getcart', fetchUser, async (req, res) => {
     let userData = await Users.findById(req.user.id);
     res.send(userData.cartData);
+});
+
+// The "catchall" handler: for any request that doesn't match one above, send back index.html
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../freeway-frontend/build', 'index.html'));
 });
 
 app.listen(port, (error) => {
