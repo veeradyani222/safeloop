@@ -33,11 +33,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Creating Upload Endpoint For Images
+
+
 app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
         success: 1,
-        image_url: `http://localhost:${port}/images/${req.file.filename}`
+         image_url: `https://f-way.onrender.com/images/${req.file.filename}`
     });
 });
 
