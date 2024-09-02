@@ -102,12 +102,15 @@
     display: flex;
     flex-direction: column;
     margin: auto; /* Center the element horizontally */
+    align-items: center;
+    justify-content: center;
   }
   
   .image-gallery {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 30vw; /* Width for smaller images section */
     gap: 5vw;
   }
@@ -135,18 +138,21 @@
   }
   
   .product-details {
-    width: 40vw; /* Width for the product details section */
+    width: 90vw; /* Width for the product details section */
     padding: 2vw; /* Padding using viewport width */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
   
   .product-name {
-    font-size: 3vw; /* Font size using viewport width */
+    font-size: 5vw; /* Font size using viewport width */
     font-weight: bold;
     margin-bottom: 1vh; /* Margin using viewport height */
   }
   
   .product-description {
-    font-size: 1.8vw; /* Font size using viewport width */
+    font-size: 3vw; /* Font size using viewport width */
     color: #555;
     margin-bottom: 2vh; /* Margin using viewport height */
   }
@@ -155,17 +161,19 @@
     display: flex;
     align-items: center;
     margin-bottom: 2vh; /* Margin using viewport height */
+    align-items: center;
+    justify-content: center;
   }
   
   .new-price {
-    font-size: 2.5vw; /* Font size using viewport width */
+    font-size: 3vw; /* Font size using viewport width */
     font-weight: bold;
     color: #e74c3c;
     margin-right: 2vw; /* Margin using viewport width */
   }
   
   .old-price {
-    font-size: 2vw; /* Font size using viewport width */
+    font-size: 3vw; /* Font size using viewport width */
     color: #888;
     text-decoration: line-through;
   }
@@ -175,7 +183,7 @@
     color: #fff;
     border: none;
     padding: 1.5vh 3vw; /* Padding using viewport units */
-    font-size: 1.8vw; /* Font size using viewport width */
+    font-size: 4vw; /* Font size using viewport width */
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease;

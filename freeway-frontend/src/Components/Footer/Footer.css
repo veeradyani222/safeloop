@@ -1,63 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-:root{
-    --first-color:#AFDBF5;
-    --second-color:#1da1f2;
-    --third-color:#00008B;
-    --fourth-color:#191970;
-    --fifth-color:#1E90FF;
-    --sixth-color:#318CE7;
-    }
-    
+:root {
+    --first-color: #AFDBF5;
+    --second-color: #1da1f2;
+    --third-color: #00008B;
+    --fourth-color: #191970;
+    --fifth-color: #1E90FF;
+    --sixth-color: #318CE7;
+}
 
-.footer{
+.footer {
     margin-top: 5vh;
     border-top: 2px solid black;
     background-color: gray;
-    
 }
 
-.footer_elements{
+.footer_elements {
     display: flex;
-    justify-content: center;
     justify-content: space-around;
     flex-direction: row;
     align-items: center;
-    text-transform: capitalize;
-    font-family: "poppins", serif;
-    font-size: 2vh;
+    font-family: "Poppins", serif;
+    font-size: 1.5vh; /* Smaller font size */
     font-weight: 700;
     color: black;
     cursor: pointer;
-    transition: all 5s smooth;
+    text-transform: capitalize;
 }
 
-.footer_elements h3:hover{
+.footer_elements a {
     color: black;
-    transform: scale(1.05);
-    
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease; /* Transition effects */
 }
 
+.footer_elements a:hover {
+    color: var(--third-color); /* Change color on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+}
 
-@media screen and (max-width:480px){
-    .footer{
-        margin-top: 0vh;
+@media screen and (max-width: 480px) {
+    .footer {
+        margin-bottom: 0;
         border-top: 2px solid black;
         background-color: gray;
-        
     }
-.footer_elements{
-    padding: 0.5vh;
-    flex-direction: column;
-    gap:2vh
-}
 
-.footer_elements h3:hover{
-    color: black;
-    transform: scale(1.05);
-    
-}
+    .footer_elements {
+        padding: 0.5vh;
+       
+        gap: 2vh;
+    }
 
-
-    
+    .footer_elements a {
+        font-size: 1vh; /* Adjust font size for smaller screens */
+    }
 }

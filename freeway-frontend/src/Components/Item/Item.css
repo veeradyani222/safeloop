@@ -17,7 +17,7 @@
 
 p.item_name {
   font-family: "poppins", serif;
-  font-size: 2vh;
+  font-size: 3vh;
   font-weight: 600;
   text-align: center;
 }
@@ -67,7 +67,7 @@ p.item_name {
   
   p.item_name {
     font-family: "poppins", serif;
-    font-size: 2vw;
+    font-size: 3vw;
     font-weight: 400;
     text-align: center;
   }
@@ -79,7 +79,7 @@ p.item_name {
   }
   
   .old_price {
-    font-size: 1vh;
+    font-size: 2vh;
   }
 
   .item img {

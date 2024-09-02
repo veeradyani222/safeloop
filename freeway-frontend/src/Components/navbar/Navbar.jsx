@@ -20,7 +20,7 @@ const Navbar = () => {
         <div className="nav-content">
           <li onClick={() => { setmenu("shop") }}> 
             <Link to="/">shop</Link> 
-            {menu === "shop" ? <hr /> : <></>}
+            {menu === "shop" ? <hr/> : <></>}
           </li>
           <li onClick={() => { setmenu("men") }}> 
             <Link to="/mens">men</Link> 

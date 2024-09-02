@@ -20,6 +20,7 @@ nav {
     justify-content: space-around;
     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
     user-select: none;
+    
 }
 
 .nav-content {
@@ -87,26 +88,53 @@ nav {
 /* Responsive styles for max width 480px */
 @media (max-width: 480px) {
     .logo-img {
-        height: 15vh;
-        width: 15vh;
+        height: 15vw;
+        width: 15vw;
         
        
         
     }
     
     nav {
-      
-        flex-direction: column;
-    }
+        width: 100vw; /* Full width of the viewport */
+        position: fixed; /* Fixes the nav to the viewport */
+        top: 0; /* Positions it at the top */
+        left: 0; /* Ensures it starts from the left edge */
+        z-index: 800; /* Ensures it stays above other elements */
+        background-color: white; /* Background color for visibility */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        padding: 10px 20px; /* Add padding for internal spacing */
+        display: flex; /* Ensures flex layout if needed */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        justify-content: center;
     
     .nav-content {
-       flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 2 columns */
+        grid-template-rows: repeat(4, auto); /* 2 rows */
+        gap: 1.5vw; /* Space between items */
+        font-size: 2.5vh;
+        margin-right: 10%;
+      
     }
+    
+    .nav-content li {
+        /* Optional: adjust alignment or add padding */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid black;
+        border-radius: 30px;
+        padding: 0 5px;
+
+    }
+    
     
     
     
     .login-profile li.login {
-        padding: 0vh 5vh;
+        padding: 0vh 0vh;
         border: 2px solid black;
         border-radius: 80px;
         cursor: pointer;
@@ -141,4 +169,4 @@ nav {
         color: white;
     }
     
-}
+}}
