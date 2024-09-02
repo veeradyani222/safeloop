@@ -6,18 +6,12 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-const { appendFileSync } = require("fs");
-const { type } = require("os");
-const { error } = require("console");
 
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cors());
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority')
-
-
-
+mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority');
 
 app.get("/", (req, res) => {
     res.send("Express app is running");
@@ -33,13 +27,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Creating Upload Endpoint For Images
-
-
 app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
         success: 1,
-         image_url: `https://f-way.onrender.com/images/${req.file.filename}`
+        image_url: `https://f-way.onrender.com/images/${req.file.filename}`
     });
 });
 
@@ -78,8 +70,6 @@ app.post('/addproduct', async (req, res) => {
         // Save the product to the database
         await product.save();
 
-       
-
         res.json({
             success: true,
             name: req.body.name,
@@ -90,109 +80,97 @@ app.post('/addproduct', async (req, res) => {
     }
 });
 
-app.post('/removeproduct' , async(req,res)=>{
-    await Product.findOneAndDelete({id:req.body.id});
-    
+app.post('/removeproduct', async (req, res) => {
+    await Product.findOneAndDelete({ id: req.body.id });
+
     res.json({
-        success:true,
+        success: true,
         name: req.body.name,
-        })
+    });
 });
 
-app.get('/allproducts' , async(req,res)=>{
+app.get('/allproducts', async (req, res) => {
     let products = await Product.find({});
-  
     res.send(products);
-})
+});
 
-//Schema Creating For User Data
-
-const Users = mongoose.model('Users',{
-    name:{
-        type:String
+// Schema Creating For User Data
+const Users = mongoose.model('Users', {
+    name: {
+        type: String
     },
-    email:{
-        type:String,
-        unique:true
+    email: {
+        type: String,
+        unique: true
     },
-    password:{
-        type:String  
+    password: {
+        type: String
     },
-    cartData:{
-        type:Object
+    cartData: {
+        type: Object
     },
-    Date:{
-        type:Date,
-        default:Date.now
+    Date: {
+        type: Date,
+        default: Date.now
     }
-})
+});
 
-//Endpoint for registering user
-
-app.post('/signup',async(req,res)=>{
-    let check= await Users.findOne({email:req.body.email});
-    if(check){
-        return res.status(400).json({success:false,errors:"This user already exists."})
+// Endpoint for registering user
+app.post('/signup', async (req, res) => {
+    let check = await Users.findOne({ email: req.body.email });
+    if (check) {
+        return res.status(400).json({ success: false, errors: "This user already exists." });
     }
-    let cart={}
+    let cart = {};
     for (let i = 0; i < 300; i++) {
-        cart[i]=0;   
-    };
+        cart[i] = 0;
+    }
     const user = new Users({
-        name:req.body.username,
-        email:req.body.email,
-        password:req.body.password, 
-        cartData:cart,
-    })
+        name: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+        cartData: cart,
+    });
     await user.save();
 
-    const data={
-        user:{
-            id:user.id,
+    const data = {
+        user: {
+            id: user.id,
         }
-    }
+    };
 
-    const token= jwt.sign(data,'secret_ecom');
-    res.json({success:true,token})
+    const token = jwt.sign(data, 'secret_ecom');
+    res.json({ success: true, token });
 });
 
-//Endpoint for user login
-app.post('/login', async (req,res) => {
-
-    let user= await Users.findOne({
-        email:req.body.email
-    })  
-    if(user){
-        const passwordCompare = req.body.password===user.password;
-        if(passwordCompare){
-            const data={
-                user:{
-                    id:user.id,
+// Endpoint for user login
+app.post('/login', async (req, res) => {
+    let user = await Users.findOne({
+        email: req.body.email
+    });
+    if (user) {
+        const passwordCompare = req.body.password === user.password;
+        if (passwordCompare) {
+            const data = {
+                user: {
+                    id: user.id,
                 }
-            }
-            const token= jwt.sign(data,'secret_ecom');
-            res.json({success:true,token})
+            };
+            const token = jwt.sign(data, 'secret_ecom');
+            res.json({ success: true, token });
+        } else {
+            res.json({ success: false, errors: "Wrong Password" });
         }
-        else{
-            res.json({success:false,errors:"Wrong Password"})
-        }
+    } else {
+        res.json({ success: false, errors: "Wrong Email Id" });
     }
-    else{
-        res.json({success:false,errors:"Wrong Email Id"})
-    }
-}
-)
+});
 
-//Creating endpoint for new collection data
-
+// Creating endpoint for new collection data
 app.get('/newcollections', async (req, res) => {
     try {
         let products = await Product.find({});
-        
-        
         let new_collections = products.slice(-9);
-        
-       
         res.send(new_collections);
     } catch (error) {
         console.error("Error fetching new collections:", error);
@@ -200,26 +178,18 @@ app.get('/newcollections', async (req, res) => {
     }
 });
 
-
-
-// creating endpoint for popular right now section
+// Creating endpoint for popular right now section
 app.get('/popularnow', async (req, res) => {
     try {
         let products = await Product.find({});
-        
         // Shuffle the array and take the first 6 items
         let popular_now = products.sort(() => 0.5 - Math.random()).slice(0, 6);
-        
-        
         res.send(popular_now);
     } catch (error) {
         console.error("Error fetching popular now collections:", error);
         res.status(500).send("Internal Server Error");
     }
 });
-
-
-
 
 // Middleware to fetch user
 const fetchUser = async (req, res, next) => {
@@ -266,10 +236,6 @@ app.get('/getcart', fetchUser, async (req, res) => {
     let userData = await Users.findById(req.user.id);
     res.send(userData.cartData);
 });
-
-
-
-       
 
 app.listen(port, (error) => {
     if (!error) {
