@@ -15,14 +15,14 @@ const ShopContextProvider = (props) => {
   const [cartItems, setcartItems] = useState(getDefaultCart());
 
   useEffect(() => {
-    fetch('http://localhost:4000/allproducts')
+    fetch('https://f-way.onrender.com/allproducts')
       .then((response) => response.json())
       .then((data) => setall_products(data));
   }, []);
 
   useEffect(() => {
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4000/getcart', {
+      fetch('https://f-way.onrender.com/getcart', {
         method: 'GET',
         headers: {
           'auth-token': `${localStorage.getItem('auth-token')}`,
@@ -38,7 +38,7 @@ const ShopContextProvider = (props) => {
   const addToCart = (itemId) => {
     setcartItems((prev) => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4000/addtocart', {
+      fetch('https://f-way.onrender.com/addtocart', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -63,7 +63,7 @@ const ShopContextProvider = (props) => {
       }
     });
     if (localStorage.getItem('auth-token')) {
-      fetch('http://localhost:4000/removefromcart', {
+      fetch('https://f-way.onrender.com/removefromcart', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -82,16 +82,11 @@ const ShopContextProvider = (props) => {
     return cartItems[itemId] > 0;
   };
 
-
   const getTotalCartCount = () => {
-
     const nonZeroCounts = Object.values(cartItems).filter(count => count > 0);
-    
-    
-    if(nonZeroCounts.length>0){return nonZeroCounts.length }
-    else{ return 0}
+    return nonZeroCounts.length > 0 ? nonZeroCounts.length : 0;
   };
-  
+
   const contextValue = { all_products, cartItems, addToCart, removeFromCart, isItemInCart, getTotalCartCount };
 
   return <ShopContext.Provider value={contextValue}>
