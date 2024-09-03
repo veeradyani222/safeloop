@@ -4,7 +4,6 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const AWS = require('aws-sdk');
 const multer = require("multer");
-const path = require("path");
 const cors = require("cors");
 
 // Initialize AWS SDK
@@ -31,6 +30,10 @@ const upload = multer({
 // Upload endpoint for images
 app.post("/upload", upload.single('product'), (req, res) => {
     const file = req.file;
+    if (!file) {
+        return res.status(400).json({ success: false, error: "No file uploaded" });
+    }
+    
     const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
         Key: `images/${Date.now()}_${file.originalname}`,
@@ -263,6 +266,6 @@ app.listen(port, (error) => {
     if (!error) {
         console.log("Server is running on " + port);
     } else {
-        console.log("Server is not running, error - " + error);
+        console.log("Server is not running, error -", error);
     }
 });
