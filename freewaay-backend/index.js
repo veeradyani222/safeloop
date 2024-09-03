@@ -232,13 +232,28 @@ app.get('/getcart', fetchUser, async (req, res) => {
 app.get('/newcollections', async (req, res) => {
     try {
         let products = await Product.find({});
-        let new_collections = products.slice(-9);
+        let new_collections = products.slice(-6);
         res.send(new_collections);
     } catch (error) {
         console.error("Error fetching new collections:", error);
         res.status(500).send("Internal Server Error");
     }
 });
+
+app.get('/popularnow', async (req, res) => {
+    try {
+        let products = await Product.find({});
+        // Shuffle products array
+        let shuffled = products.sort(() => 0.5 - Math.random());
+        // Get the first 6 products from the shuffled array
+        let popular_now = shuffled.slice(0, 6);
+        res.send(popular_now);
+    } catch (error) {
+        console.error("Error fetching popular products:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
