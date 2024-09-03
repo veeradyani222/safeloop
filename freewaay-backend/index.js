@@ -8,18 +8,29 @@ const path = require("path");
 const cors = require("cors");
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'https://f-way-1-frontend.onrender.com',
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../freeway-frontend/build')));
+
+// Serve images
+app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 
 app.get("/", (req, res) => {
     res.send("Express app is running");
 });
 
+// Multer storage configuration
 const storage = multer.diskStorage({
     destination: './upload/images',
     filename: (req, file, cb) => {
@@ -29,8 +40,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Creating Upload Endpoint For Images
-app.use('/images', express.static(path.join(__dirname, 'upload/images')));
+// Image upload endpoint
 app.post("/upload", upload.single('product'), (req, res) => {
     res.json({
         success: 1,
@@ -66,8 +76,6 @@ app.post('/addproduct', async (req, res) => {
             description: req.body.description,
         });
 
-        console.log("Product to be saved:", product);
-
         await product.save();
 
         res.json({
@@ -90,107 +98,75 @@ app.post('/removeproduct', async (req, res) => {
 });
 
 app.get('/allproducts', async (req, res) => {
-    let products = await Product.find({});
-    res.send(products);
+    try {
+        let products = await Product.find({});
+        res.send(products);
+    } catch (error) {
+        console.error("Error fetching products:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-// Schema Creating For User Data
+// Schema for creating Users
 const Users = mongoose.model('Users', {
-    name: {
-        type: String
-    },
-    email: {
-        type: String,
-        unique: true
-    },
-    password: {
-        type: String
-    },
-    cartData: {
-        type: Object
-    },
-    Date: {
-        type: Date,
-        default: Date.now
-    }
+    name: { type: String },
+    email: { type: String, unique: true },
+    password: { type: String },
+    cartData: { type: Object },
+    date: { type: Date, default: Date.now }
 });
 
-// Endpoint for registering user
+// Signup endpoint
 app.post('/signup', async (req, res) => {
-    let check = await Users.findOne({ email: req.body.email });
-    if (check) {
-        return res.status(400).json({ success: false, errors: "This user already exists." });
-    }
-    let cart = {};
-    for (let i = 0; i < 300; i++) {
-        cart[i] = 0;
-    }
-    const user = new Users({
-        name: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        cartData: cart,
-    });
-    await user.save();
-
-    const data = {
-        user: {
-            id: user.id,
+    try {
+        let check = await Users.findOne({ email: req.body.email });
+        if (check) {
+            return res.status(400).json({ success: false, errors: "This user already exists." });
         }
-    };
+        let cart = {};
+        for (let i = 0; i < 300; i++) {
+            cart[i] = 0;
+        }
+        const user = new Users({
+            name: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            cartData: cart,
+        });
+        await user.save();
 
-    const token = jwt.sign(data, 'secret_ecom');
-    res.json({ success: true, token });
+        const data = { user: { id: user.id } };
+        const token = jwt.sign(data, 'secret_ecom');
+        res.json({ success: true, token });
+    } catch (error) {
+        console.error("Error during signup:", error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
-// Endpoint for user login
+// Login endpoint
 app.post('/login', async (req, res) => {
-    let user = await Users.findOne({
-        email: req.body.email
-    });
-    if (user) {
-        const passwordCompare = req.body.password === user.password;
-        if (passwordCompare) {
-            const data = {
-                user: {
-                    id: user.id,
-                }
-            };
-            const token = jwt.sign(data, 'secret_ecom');
-            res.json({ success: true, token });
+    try {
+        let user = await Users.findOne({ email: req.body.email });
+        if (user) {
+            const passwordCompare = req.body.password === user.password;
+            if (passwordCompare) {
+                const data = { user: { id: user.id } };
+                const token = jwt.sign(data, 'secret_ecom');
+                res.json({ success: true, token });
+            } else {
+                res.status(400).json({ success: false, errors: "Wrong Password" });
+            }
         } else {
-            res.json({ success: false, errors: "Wrong Password" });
+            res.status(400).json({ success: false, errors: "Wrong Email Id" });
         }
-    } else {
-        res.json({ success: false, errors: "Wrong Email Id" });
-    }
-});
-
-// Creating endpoint for new collection data
-app.get('/newcollections', async (req, res) => {
-    try {
-        let products = await Product.find({});
-        let new_collections = products.slice(-9);
-        res.send(new_collections);
     } catch (error) {
-        console.error("Error fetching new collections:", error);
+        console.error("Error during login:", error);
         res.status(500).send("Internal Server Error");
     }
 });
 
-// Creating endpoint for popular right now section
-app.get('/popularnow', async (req, res) => {
-    try {
-        let products = await Product.find({});
-        let popular_now = products.sort(() => 0.5 - Math.random()).slice(0, 6);
-        res.send(popular_now);
-    } catch (error) {
-        console.error("Error fetching popular now collections:", error);
-        res.status(500).send("Internal Server Error");
-    }
-});
-
-// Middleware to fetch user
+// Fetch user middleware
 const fetchUser = async (req, res, next) => {
     const token = req.header('auth-token');
     if (!token) {
@@ -205,46 +181,65 @@ const fetchUser = async (req, res, next) => {
     }
 };
 
-// Endpoint for adding products to cart
+// Add to cart endpoint
 app.post('/addtocart', fetchUser, async (req, res) => {
-    let userData = await Users.findById(req.user.id);
-    if (userData.cartData[req.body.itemId]) {
-        userData.cartData[req.body.itemId] += 1;
-    } else {
-        userData.cartData[req.body.itemId] = 1;
+    try {
+        let userData = await Users.findById(req.user.id);
+        if (userData.cartData[req.body.itemId]) {
+            userData.cartData[req.body.itemId] += 1;
+        } else {
+            userData.cartData[req.body.itemId] = 1;
+        }
+        await Users.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
+        res.send({ message: 'Added' });
+    } catch (error) {
+        console.error("Error adding to cart:", error);
+        res.status(500).send("Internal Server Error");
     }
-    await Users.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
-    res.send({ message: 'Added' });
 });
 
-// Endpoint for removing products from cart
+// Remove from cart endpoint
 app.post('/removefromcart', fetchUser, async (req, res) => {
-    let userData = await Users.findById(req.user.id);
+    try {
+        let userData = await Users.findById(req.user.id);
 
-    if (userData.cartData[req.body.itemId] > 1) {
-        userData.cartData[req.body.itemId] -= 1;
-    } else {
-        delete userData.cartData[req.body.itemId];
+        if (userData.cartData[req.body.itemId] > 1) {
+            userData.cartData[req.body.itemId] -= 1;
+        } else {
+            delete userData.cartData[req.body.itemId];
+        }
+
+        await Users.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
+        res.send({ message: 'Removed' });
+    } catch (error) {
+        console.error("Error removing from cart:", error);
+        res.status(500).send("Internal Server Error");
     }
-
-    await Users.findByIdAndUpdate(req.user.id, { cartData: userData.cartData });
-    res.send({ message: 'Removed' });
 });
 
+// Get cart data endpoint
 app.get('/getcart', fetchUser, async (req, res) => {
-    let userData = await Users.findById(req.user.id);
-    res.send(userData.cartData);
-});
-
-// The "catchall" handler: for any request that doesn't match one above, send back index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../freeway-frontend/build', 'index.html'));
-});
-
-app.listen(port, (error) => {
-    if (!error) {
-        console.log("Server is running on " + port);
-    } else {
-        console.log("Server is not running, error - " + error);
+    try {
+        let userData = await Users.findById(req.user.id);
+        res.send(userData.cartData);
+    } catch (error) {
+        console.error("Error fetching cart data:", error);
+        res.status(500).send("Internal Server Error");
     }
+});
+
+// Fetch new collections endpoint
+app.get('/newcollections', async (req, res) => {
+    try {
+        let products = await Product.find({});
+        let new_collections = products.slice(-9);
+        res.send(new_collections);
+    } catch (error) {
+        console.error("Error fetching new collections:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
