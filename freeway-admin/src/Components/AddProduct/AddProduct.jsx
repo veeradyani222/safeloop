@@ -27,54 +27,33 @@ const AddProduct = () => {
     console.log(productDetails);
 
     let product = { ...productDetails };
-    let responseData = {};
-
-    // Upload image
+    let responseData 
     let formData = new FormData();
     formData.append('product', image);
 
-    try {
-      const imageResponse = await fetch('https://f-way.onrender.com/upload', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json'
-        },
-        body: formData,
-      });
-      responseData = await imageResponse.json();
+    await fetch('http://localhost:4000/upload', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      },
+      body: formData,
+    }).then((resp) => resp.json()).then((data)=>{responseData=data});
 
-      if (responseData.success) {
-        product.image = responseData.image_url;
-      } else {
-        alert("Failed to upload image");
-        return;
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Error uploading image");
-      return;
+    if (responseData.success) {
+      product.image = responseData.image_url;
     }
 
-    // Add product
-    try {
-      const productResponse = await fetch('https://f-way.onrender.com/addproduct', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(product)
-      });
-      const result = await productResponse.json();
-      if (result.success) {
-        alert("Product Added!");
-      } else {
-        alert("Failed to add product");
-      }
-    } catch (error) {
-      console.error("Error adding product:", error);
-      alert("Error adding product");
-    }
+    console.log(product);  
+    await fetch('http://localhost:4000/addproduct',{
+      method:'POST',
+      headers:{
+        Accept:'application/json',
+        'Content-type':'application/json',
+      },
+      body:JSON.stringify(product)
+    }).then((resp)=>resp.json()).then((data)=>{
+      data.success?alert("Product Added!"):alert("Failed!")
+    })
   };
 
   return (
@@ -134,7 +113,7 @@ const AddProduct = () => {
           <option value="women">Women</option>
           <option value="kid">Kids</option>
         </select>
-        <button type="submit" className="submit-button">Add Product</button>
+        <button onClick={addProduct} type="submit" className="submit-button">Add Product</button>
       </form>
     </div>
   );
