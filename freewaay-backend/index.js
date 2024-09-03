@@ -8,11 +8,25 @@ const path = require("path");
 const cors = require("cors");
 
 app.use(express.json());
+const allowedOrigins = [
+  'https://f-way-1-frontend.onrender.com',
+  'https://f-way-1-admin.onrender.com'
+];
+
+// Configure CORS
 app.use(cors({
-    origin: 'https://f-way-1-frontend.onrender.com',
-    methods: ['GET', 'POST'],
-    credentials: true
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST'],
+  credentials: true
 }));
+
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority', {
