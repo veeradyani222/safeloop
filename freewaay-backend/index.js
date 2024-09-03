@@ -240,6 +240,25 @@ app.get('/newcollections', async (req, res) => {
     }
 });
 
+app.get('/popularnow', async (req, res) => {
+    try {
+        // Fetch all products from the database
+        let products = await Product.find({});
+
+        // Shuffle the array of products
+        const shuffled = products.sort(() => 0.5 - Math.random());
+
+        // Get the first 6 products from the shuffled array
+        let popularProducts = shuffled.slice(0, 6);
+
+        res.send(popularProducts);
+    } catch (error) {
+        console.error("Error fetching popular products:", error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
