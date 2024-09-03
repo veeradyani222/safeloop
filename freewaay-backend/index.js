@@ -8,11 +8,7 @@ const path = require("path");
 const cors = require("cors");
 
 app.use(express.json());
-app.use(cors({
-    origin: '*',  // Allow requests from any origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Allow specific methods
-    credentials: true  // Allow credentials (if needed)
-}));
+app.use(cors());
 
 // MongoDB connection
 mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/freeway?retryWrites=true&w=majority', {
