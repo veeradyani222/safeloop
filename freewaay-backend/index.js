@@ -11,9 +11,9 @@ app.use(express.json());
 const allowedOrigins = [
   'https://f-way-1-frontend.onrender.com',
   'https://f-way-1-admin.onrender.com',
-  'https://freeway-chi.vercel.app/',
-  'https://freeway-czhudszkg-veeradyani222s-projects.vercel.app/',
-  'https://freeway-admin.vercel.app/'
+  'https://freeway-chi.vercel.app',
+  'https://freeway-czhudszkg-veeradyani222s-projects.vercel.app',
+  'https://freeway-admin.vercel.app'
 ];
 
 // Configure CORS
