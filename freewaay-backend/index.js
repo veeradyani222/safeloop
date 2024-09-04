@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const fs = require('fs');
 
 app.use(express.json());
 app.use(cors());
@@ -34,11 +35,32 @@ const upload = multer({ storage: storage });
 // Serve images statically
 app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 
-// Endpoint for image upload
+// Endpoint for image upload and conversion to base64
 app.post("/upload", upload.single('product'), (req, res) => {
-    res.json({
-        success: 1,
-        image_url: `https://freeway-web.onrender.com/images/${req.file.filename}`
+    // Read the file from the temporary location
+    fs.readFile(req.file.path, (err, data) => {
+        if (err) {
+            console.error("Error reading file:", err);
+            return res.status(500).json({ error: "Failed to process image" });
+        }
+
+        // Convert the file data to a base64 string
+        const base64Image = Buffer.from(data).toString('base64');
+        const mimeType = req.file.mimetype; // Get the MIME type of the image
+        const base64String = `data:${mimeType};base64,${base64Image}`;
+
+        // Optionally, delete the file after conversion
+        fs.unlink(req.file.path, (err) => {
+            if (err) {
+                console.error("Error deleting file:", err);
+            }
+        });
+
+        // Send the base64 string as the response
+        res.json({
+            success: 1,
+            image_url: base64String
+        });
     });
 });
 
