@@ -6,7 +6,7 @@ const BreadCrum = (props) => {
     const {product}=props;
   return (
     <div className='BreadCrum'>
-      HOME <FontAwesomeIcon icon={faAngleRight} /> SHOP <FontAwesomeIcon icon={faAngleRight} /> {product.category} <FontAwesomeIcon icon={faAngleRight} /> {product.name}
+      HOME <FontAwesomeIcon icon={faAngleRight} /> SHOPS <FontAwesomeIcon icon={faAngleRight} /> {product.category} <FontAwesomeIcon icon={faAngleRight} /> {product.name}
      
     </div>
   )
