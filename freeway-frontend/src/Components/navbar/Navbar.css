@@ -1,17 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-:root {
-    --first-color: #AFDBF5;
-    --second-color: #1da1f2;
-    --third-color: #3E8EDE;
-    --fourth-color: #4169E1;
-    --fifth-color: #1E90FF;
-    --sixth-color: #318CE7;
+.logo{
+    justify-content: center;
+    align-items: center;
 }
 
 .logo-img {
-    height: 20vh;
-    width: 20vh;
+    height: 15vh;
+    width: 15vh;
+
 }
 
 nav {
@@ -21,6 +16,7 @@ nav {
     box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
     user-select: none;
     
+    
 }
 
 .nav-content {
@@ -28,21 +24,52 @@ nav {
     justify-content: center;
     align-items: center;
     list-style-type: none;
-    gap: 5vw;
+    gap: 3vw;
     margin-left: 0;
     font-family: "Poppins", serif;
-    text-transform: capitalize;
-    font-size: 3.5vh;
-    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 2.0vh;
+    font-weight: 600;
     cursor: pointer;
 }
+.nav-content li{
+    padding: 5px;
+   
+    
+}
 
+
+
+@keyframes shine {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+
+.highlighted {
+    padding: 0px 15%;
+   
+    background: var(--first-color);
+    color: black; /* Optional: change text color for better visibility */
+    border: 1px solid black;
+}
+
+.highlighted:hover {
+    background: linear-gradient(45deg, #FF6F00, #FF8C00, #FFB74D);
+    background-size: 200% 100%;
+    animation: shine 2.5s linear infinite ;
+    color:black;
+  }
 .login-profile {
     display: flex;
     justify-content: center;
     align-items: center;
     list-style-type: none;
-    gap: 5vw;
+    gap: 2vw;
     margin-left: 0;
     font-family: "Poppins", serif;
     text-transform: capitalize;
@@ -50,14 +77,15 @@ nav {
     font-weight: 800;
 }
 
-.login-profile li.login,
-.login-profile li.profile {
-    padding: 1vh;
+.login-profile li.login
+{
+    padding: 0vh;
     border: 2px solid black;
-    border-radius: 80px;
+   
     cursor: pointer;
     text-align: center;
-    width: 10vw;
+    width: 6vw;
+    background-color: orange;
 }
 
 .cart li.cart {
@@ -66,23 +94,32 @@ nav {
 }
 
 .cart li.cart:hover {
-    color: var(--fourth-color);
+    color: linear-gradient(to right, #FFD580, #FF8C00);
 }
 
-.cart .cart-number {
+.cart .cart-number  {
     height: 1vh;
     color: red;
     margin-left: 100%;
 }
 
 .login-profile li.login:hover {
-    background-color: var(--second-color);
-    color: white;
+    background:var(--first-color);
+    color: black;
 }
 
 .login-profile li.profile:hover {
-    background-color: var(--third-color);
+    background-color:linear-gradient(to right, #FFD580, #FF8C00);
     color: white;
+}
+
+li.wishlist{
+    color: red;
+    font-size: 5vh;
+}
+
+.wishlist-number{
+    color: black;
 }
 
 /* Responsive styles for max width 480px */
@@ -150,7 +187,7 @@ nav {
     }
     
     .cart li.cart:hover {
-        color: var(--fourth-color);
+        color:linear-gradient(to right, #FFD580, #FF8C00);
     }
     
     .cart .cart-number {
@@ -160,12 +197,12 @@ nav {
     }
     
     .login-profile li.login:hover {
-        background-color: var(--second-color);
+        background-color: linear-gradient(to right, #FFD580, #FF8C00);
         color: white;
     }
     
     .login-profile li.profile:hover {
-        background-color: var(--third-color);
+        background-color: linear-gradient(to right, #FFD580, #FF8C00);
         color: white;
     }
     

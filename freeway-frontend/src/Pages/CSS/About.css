@@ -1,0 +1,28 @@
+.about-containers{
+    gap: 3vh;
+    margin-top: 5vh;
+}
+
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2.5vh;
+    font-family: "poppins" , serif;
+    font-weight: 500;
+    margin-top: 5vh;
+    margin-left: 4vh;
+    margin-right: 4vh;
+}
+
+.decorations{
+    display: flex;
+  justify-content: center;
+ margin-top: 10vh;
+  align-items: center;
+  gap: 5vw;
+  font-size: 5vh;
+  color: #E6A817;
+  font-weight: 400;
+}

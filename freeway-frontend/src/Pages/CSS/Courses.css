@@ -1,0 +1,6 @@
+.courses-container {
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 4 equal-width columns */
+   
+  }

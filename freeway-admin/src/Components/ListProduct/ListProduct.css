@@ -8,10 +8,10 @@
 
 .list-product-head {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
   text-align: center;
   font-weight: 600;
-  font-size: 2vh;
+  font-size: 1.5vh;
   padding: 1vh 0;
   border-bottom: 1px solid #ddd;
 }
@@ -23,10 +23,10 @@
 
 .list-product-format-main {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr 2fr 1fr 1fr 1fr;
+  grid-template-columns:2fr 1fr 1fr 2fr 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
   align-items: center;
   text-align: center;
-  font-size: 1.8vh;
+  font-size: 1.5vh;
   padding: 1vh 0; /* Reduced padding */
   border-bottom: 1px solid #ddd;
 }

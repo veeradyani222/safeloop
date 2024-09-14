@@ -1,0 +1,22 @@
+.categories{
+    margin-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    
+}
+
+.categories li {
+    list-style-type: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for scale and shadow */
+}
+
+.categories li:hover {
+    transform: scale(1.1); /* Scale up the list item */
+    box-shadow: 0 0 15px 5px rgba(255, 165, 0, 0.7); /* Bright orange shadow */
+}
+
+.categories li img{
+    width: 20vw;
+    height: 20vw;
+}

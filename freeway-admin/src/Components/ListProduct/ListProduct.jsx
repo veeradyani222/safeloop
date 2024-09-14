@@ -6,7 +6,7 @@ const ListProduct = () => {
   const [allproducts, setallproducts] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch('https://freeway-web.onrender.com/allproducts')
+    await fetch('http://localhost:4000/allproducts')
       .then((res) => res.json())
       .then((data) => {
         setallproducts(data);
@@ -18,7 +18,7 @@ const ListProduct = () => {
   }, []);
 
   const handleRemove = async (id) => {
-              await fetch('https://freeway-web.onrender.com/removeproduct',{
+              await fetch('http://localhost:4000/removeproduct',{
                 method: 'POST',
                 headers:{
                   Accept:'application/json',
@@ -33,11 +33,15 @@ const ListProduct = () => {
     <div className='list-product'>
       <div className="list-product-head">
         <p>Product name</p>
+        <p>id</p>
         <p>Image</p>
-        <p>Description</p>
+        <p>Lecturer</p>
         <p>Old Price</p>
-        <p>Offer Price</p>
+        <p>New Price</p>
         <p>Category</p>
+        <p>Sub-category</p>
+        <p>Batch Starts</p>
+        <p>Batch Ends</p>
         <p>Remove</p>
       </div>
       <div className="list-product-main">
@@ -46,12 +50,16 @@ const ListProduct = () => {
           return (
             <div key={index} className="list-product-format-main list-product-format">
               <p>{product.name}</p>
+              <p>{product.id}</p>
               <img src={product.image} alt="not found" />
-              <p>{product.description}</p>
-              <p>${product.old_price}</p>
-              <p>${product.new_price}</p>
-              <p>{product.category}</p>
-              <button onClick={() => handleRemove(product.id)}>
+              <p>{product.lecturer}</p>
+              <p>₹{product.old_price}</p>
+              <p>₹{product.new_price}</p>
+              <p>{product.category}</p> 
+              <p>{product.sub_category}</p> 
+              <p>{new Date(product.batch_start).toLocaleDateString('en-GB')}</p>
+              <p>{new Date(product.batch_end).toLocaleDateString('en-GB')}</p>
+               <button onClick={() => handleRemove(product.id)}>
                 <img src={cross_icon} alt="Remove" />
               </button>
             </div>
@@ -63,3 +71,5 @@ const ListProduct = () => {
 }
 
 export default ListProduct;
+
+            

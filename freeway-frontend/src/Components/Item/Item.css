@@ -1,32 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-:root {
-  --first-color: #AFDBF5;
-  --second-color: #1da1f2;
-  --third-color: #00008B;
-  --fourth-color: #191970;
-  --fifth-color: #1E90FF;
-  --sixth-color: #318CE7;
+.item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin : 2vh 2vh
 }
 
-.item {
+.item img {
+  width: 20vw;
+  height: 20vw;
+  margin-bottom: 0; 
+  padding: 0; 
+  display: block; 
+}
+
+.item-details {
+  margin-top: 10px; 
+}
+
+.imp-details {
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  font-family: "Poppins", serif;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
 p.item_name {
-  font-family: "poppins", serif;
-  font-size: 3vh;
-  font-weight: 600;
-  text-align: center;
+  font-family: "Poppins", serif;
+  font-size: 2vh;
+  font-weight: 500;
+  margin: 0;
 }
 
 .item_prices {
   display: flex;
   flex-direction: row;
-  font-family: "poppins", serif;
   justify-content: space-around;
+  font-family: "Poppins", serif;
   font-size: 3vh;
   font-weight: 600;
   align-items: center;
@@ -36,58 +50,50 @@ p.item_name {
 .old_price {
   font-size: 3vh;
   color: gray;
-  justify-content: center;
-  align-items: center;
   text-decoration: line-through;
-  text-decoration-color: black;
 }
 
+.lecturer{
+  color: darkslategrey;
+  font-weight: 700;
+  font-size: 1.5vh;
+}
+.sub-cat{
+  font-size: 1.5vh;
+}
 .other_details_items {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
 }
-
-.wish_list {
+.heart-button {
+  cursor: pointer;
+  position: relative;
+  color: lightsteelblue;
   font-size: 5vh;
 }
 
-.item img {
-  width: 25vw;
-  height: 30vw;
+.heart-button .clicked {
+  color: red; /* Red heart when clicked */
+  font-size: 5vh;
 }
 
-@media screen and (max-width:480px){
-  .item {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  p.item_name {
-    font-family: "poppins", serif;
-    font-size: 3vw;
-    font-weight: 400;
-    text-align: center;
-  }
-  
-  .item_prices {
-   
-    font-size: 2vh;
-    
-  }
-  
-  .old_price {
-    font-size: 2vh;
-  }
+.heart-animation {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 1vh;
+  animation: floatHearts 2s ease-out forwards;
+}
 
-  .item img {
-    width: 35vw;
-    height: 40vw;
+@keyframes floatHearts {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  
-  
-  
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
 }
