@@ -11,12 +11,10 @@ const fs = require('fs');
 app.use(express.json({ limit: '10mb' }));
 
 
-// Middleware for parsing URL-encoded bodies with a size limit
-
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
 
-// MongoDB connection
+
 mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/SafeLoop?retryWrites=true&w=majority');
 
 
@@ -24,7 +22,7 @@ app.get("/", (req, res) => {
     res.send("Express app is running");
 });
 
-// Multer configuration for image upload
+
 const storage = multer.diskStorage({
     destination: './upload/images' || './upload/m-images',
     filename: (req, file, cb) => {
@@ -33,7 +31,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
 
 app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 
@@ -525,8 +522,6 @@ app.get('/getwishlist', fetchUser, async (req, res) => {
         res.status(500).send({ errors: "Internal Server Error" });
     }
 });
-
-
 // Start the server
 app.listen(port, (error) => {
     if (!error) {

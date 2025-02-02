@@ -17,6 +17,7 @@ import Wishlist from './Pages/Wishlist.jsx';
 import PostIssue from './Components/PostIssue/PostIssue.jsx';
 import Incidents from './Pages/Incidents.jsx';
 import ProductDisplay from './Components/ProductDispay/ProductDisplay.jsx';
+import FirstNavbar from './Components/FirstNavbar/FirstNavbar.jsx';
 
 function App() {
 
@@ -24,7 +25,8 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+    <FirstNavbar />
+  <Navbar className="navbar" />
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/Incidents/Harassment" element={<ShopCategory category="Harassment" />} />
