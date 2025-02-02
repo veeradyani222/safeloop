@@ -4,7 +4,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin : 2vh 2vh
+  margin : 2vh 2vh;
+  border: 2px solid black;
+  padding: 2vh 2vh;
 }
 
 .item img {
@@ -41,16 +43,16 @@ p.item_name {
   flex-direction: row;
   justify-content: space-around;
   font-family: "Poppins", serif;
-  font-size: 3vh;
+  font-size: 2vh;
   font-weight: 600;
   align-items: center;
   gap: 1vw;
 }
 
 .old_price {
-  font-size: 3vh;
+  font-size: 2vh;
   color: gray;
-  text-decoration: line-through;
+  
 }
 
 .lecturer{

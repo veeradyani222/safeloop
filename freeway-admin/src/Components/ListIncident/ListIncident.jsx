@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import './ListProduct.css'
+import './ListIncident.css'
 import cross_icon from '../assets/cart_cross_icon.png'
 
-const ListProduct = () => {
-  const [allproducts, setallproducts] = useState([]);
+const ListIncident = () => {
+  const [allincidents, setallincidents] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch('http://localhost:4000/allproducts')
+    await fetch('http://localhost:4000/allincidents_admin')
       .then((res) => res.json())
       .then((data) => {
-        setallproducts(data);
+        setallincidents(data);
       });
   }
 
@@ -18,7 +18,7 @@ const ListProduct = () => {
   }, []);
 
   const handleRemove = async (id) => {
-              await fetch('http://localhost:4000/removeproduct',{
+              await fetch('http://localhost:4000/removeincident',{
                 method: 'POST',
                 headers:{
                   Accept:'application/json',
@@ -32,34 +32,28 @@ const ListProduct = () => {
   return (
     <div className='list-product'>
       <div className="list-product-head">
-        <p>Product name</p>
+        <p>Incident name</p>
         <p>id</p>
         <p>Image</p>
-        <p>Lecturer</p>
-        <p>Old Price</p>
-        <p>New Price</p>
         <p>Category</p>
         <p>Sub-category</p>
-        <p>Batch Starts</p>
-        <p>Batch Ends</p>
+        <p>Incident Date</p>
+        <p>Upload date</p>
         <p>Remove</p>
       </div>
       <div className="list-product-main">
         <hr />
-        {allproducts.map((product, index) => {
+        {allincidents.map((incident, index) => {
           return (
             <div key={index} className="list-product-format-main list-product-format">
-              <p>{product.name}</p>
-              <p>{product.id}</p>
-              <img src={product.image} alt="not found" />
-              <p>{product.lecturer}</p>
-              <p>₹{product.old_price}</p>
-              <p>₹{product.new_price}</p>
-              <p>{product.category}</p> 
-              <p>{product.sub_category}</p> 
-              <p>{new Date(product.batch_start).toLocaleDateString('en-GB')}</p>
-              <p>{new Date(product.batch_end).toLocaleDateString('en-GB')}</p>
-               <button onClick={() => handleRemove(product.id)}>
+              <p>{incident.name}</p>
+              <p>{incident.id}</p>
+              <img src={incident.image} alt="not found" />
+              <p>{incident.category}</p> 
+              <p>{incident.sub_category}</p> 
+              <p>{new Date(incident.date).toLocaleDateString('en-GB')}</p>
+              <p>{new Date(incident.date_upload).toLocaleDateString('en-GB')}</p>
+               <button onClick={() => handleRemove(incident.id)}>
                 <img src={cross_icon} alt="Remove" />
               </button>
             </div>
@@ -70,6 +64,6 @@ const ListProduct = () => {
   )
 }
 
-export default ListProduct;
+export default ListIncident;
 
             

@@ -17,7 +17,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/pro-library?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://veeradyani2:S%40nju_143@cluster0.uafyz.mongodb.net/SafeLoop?retryWrites=true&w=majority');
 
 
 app.get("/", (req, res) => {
@@ -38,7 +38,7 @@ const upload = multer({ storage: storage });
 app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 
 
-app.post("/upload", upload.single('product'), (req, res) => {
+app.post("/upload", upload.single('image'), (req, res) => {
 
     fs.readFile(req.file.path, (err, data) => {
         if (err) {
@@ -155,95 +155,65 @@ app.post('/removeslider', async (req, res) => {
 });
 
 // Schema for creating Products
-const Product = mongoose.model("Product", new mongoose.Schema({
+const Incident_Admin = mongoose.model("Incident_Admin", new mongoose.Schema({
     id: { type: Number, required: true },
     name: { type: String, required: true },
     image: { type: String, required: true },
     category: { type: String, required: true },
     sub_category: { type: String, required: true },
-    lecturer: { type: String, required: true },
-    new_price: { type: Number, required: true },
-    old_price: { type: Number, required: true },
-    kit_contents: { type: String, required: true },
-    lecture_duration: { type: String, required: true },
-    batch_start: { type: String, required: true },
-    batch_end: { type: String, required: true },
-    ammendment_support: { type: String, required: true },
-    validity: { type: String, required: true },
-    views: { type: String, required: true },
-    mode: { type: String, required: true },
-    language: { type: String, required: true },
-    study_material: { type: String, required: true },
-    doubt_solving: { type: String, required: true },
-    technical_support: { type: String, required: true },
-    note: { type: String, required: true },
-    about_faculty: { type: String, required: true },
+    tips: { type: String, required: true },
     description: { type: String, required: true },
-    product_link: { type: String, required: true },
-    date: { type: Date, default: Date.now },
-    available: { type: Boolean, default: true }
+    location:{ type: String, required: true },
+    date: { type: Date, required: true },
+    time:{type: String, required: true },
+    date_upload:{ type: Date, default: Date.now },
 }));
 
-
-
 // Endpoint for adding a product
-app.post('/addproduct', upload.single('image'), async (req, res) => {
+app.post('/addincident_admin', upload.single('image'), async (req, res) => {
     try {
         // Fetch the last product by id
-        const lastProduct = await Product.findOne({}, {}, { sort: { id: -1 } });
-        const id = lastProduct ? lastProduct.id + 1 : 1;
+        const lastIncident = await Incident_Admin.findOne({}, {}, { sort: { id: -1 } });
+        const id = lastIncident ? lastIncident.id + 1 : 1;
 
         // Create a new product with data from the request
-        const product = new Product({
+        const incident_admin = new Incident_Admin({
             id: id,
             name: req.body.name,
             image: req.file ? `http://localhost:${port}/images/${req.file.filename}` : req.body.image,
             category: req.body.category,
             sub_category: req.body.sub_category,
-            lecturer: req.body.lecturer,
-            new_price: req.body.new_price,
-            old_price: req.body.old_price,
+            tips:req.body.tips,
+            location:req.body.location,
+            date:req.body.date,
+            time:req.body.time,
             description: req.body.description,
-            kit_contents: req.body.kit_contents,
-            lecture_duration: req.body.lecture_duration,
-            batch_start: req.body.batch_start,
-            batch_end: req.body.batch_end,
-            ammendment_support: req.body.ammendment_support,
-            validity: req.body.validity,
-            views: req.body.views,
-            mode: req.body.mode,
-            language: req.body.language,
-            study_material: req.body.study_material,
-            doubt_solving: req.body.doubt_solving,
-            technical_support: req.body.technical_support,
-            note: req.body.note,
-            about_faculty: req.body.about_faculty,
-            product_link: req.body.product_link,
+            
         });
 
         // Save the new product in the database
-        await product.save();
+        await incident_admin.save();
 
         res.json({
             success: true,
             name: req.body.name,
         });
     } catch (error) {
-        console.error("Error saving product:", error);
-        res.status(500).json({ error: "Failed to add product" });
+        console.error("Error saving incident:", error);
+        res.status(500).json({ error: "Failed to add incident" });
     }
 });
 
-app.get('/allproducts', async (req, res) => {
-    let products = await Product.find({});
-    res.send(products);
+app.get('/allincidents_admin', async (req, res) => {
+    let incidents = await Incident_Admin.find({});
+    res.send(incidents);
 });
 
 
 
 // Endpoint for removing a product
-app.post('/removeproduct', async (req, res) => {
-    await Product.findOneAndDelete({ id: req.body.id });
+app.post('/removeincident', async (req, res) => {
+    await Incident_Admin.findOneAndDelete({ id: req.body.id });
 
     res.json({
         success: true,
@@ -251,34 +221,33 @@ app.post('/removeproduct', async (req, res) => {
     });
 });
 
-const Faculty = mongoose.model("Faculty", new mongoose.Schema({
+const Volunteer = mongoose.model("Volunteer", new mongoose.Schema({
     id: { type: Number, required: true },
     image: { type: String, required: true },
-    lecturer: { type: String, required: true },
-    about_faculty:{ type: String, required: true },
+    volunteer: { type: String, required: true },
+    about_volunteer:{ type: String, required: true },
     date: { type: Date, default: Date.now },
 }));
 
 
 
 // Endpoint for adding a product
-app.post('/addFaculty', upload.single('image'), async (req, res) => {
+app.post('/addvolunteer', upload.single('image'), async (req, res) => {
     try {
         // Fetch the last product by id
-        const lastFaculty = await Faculty.findOne({}, {}, { sort: { id: -1 } });
-        const id = lastFaculty ? lastFaculty.id + 1 : 1;
+        const lastVolunteer = await Volunteer.findOne({}, {}, { sort: { id: -1 } });
+        const id = lastVolunteer ? lastVolunteer.id + 1 : 1;
 
         // Create a new product with data from the request
-        const faculty = new Faculty({
+        const volunteer = new Volunteer({
             id: id,
             image: req.file ? `http://localhost:${port}/images/${req.file.filename}` : req.body.image,
-            lecturer: req.body.lecturer,
-            about_faculty: req.body.about_faculty,
-            product_link: req.body.product_link,
+            volunteer: req.body.volunteer,
+            about_volunteer: req.body.about_volunteer,
         });
 
         // Save the new product in the database
-        await faculty.save();
+        await volunteer.save();
 
         res.json({
             success: true,
@@ -290,16 +259,16 @@ app.post('/addFaculty', upload.single('image'), async (req, res) => {
     }
 });
 
-app.get('/allFaculties', async (req, res) => {
-    let faculty = await Faculty.find({});
-    res.send(faculty);
+app.get('/allvolunteers', async (req, res) => {
+    let volunteer = await Volunteer.find({});
+    res.send(volunteer);
 });
 
 
 
-// Endpoint for removing a product
-app.post('/removefaculty', async (req, res) => {
-    await Faculty.findOneAndDelete({ id: req.body.id });
+// Endpoint for removing a faculty
+app.post('/removevolunteer', async (req, res) => {
+    await Volunteer.findOneAndDelete({ id: req.body.id });
 
     res.json({
         success: true,
@@ -312,10 +281,10 @@ app.post('/removefaculty', async (req, res) => {
 const Content = mongoose.model("Content", new mongoose.Schema({
     id: { type: Number, required: true },
     about_sections: { type: [String], required: true }, 
-    terms_conditions: { type: [String], required: true }, 
+    terms_conditions: { type: [String], required: false }, 
     contact_numbers: { type: [String], required: true }, 
     email_ids: { type: [String], required: true }, 
-    addresses: { type: [String], required: true }, 
+    addresses: { type: [String], required: false }, 
     instagram: { type: String, required: false },
     github: { type: String, required: false },
     facebook: { type: String, required: false },

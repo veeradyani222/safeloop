@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import './AddLecturer.css';
+import './AddVolunteer.css';
 import upload_image from '../assets/upload_image.png';
 
-const AddLecturer = () => {
+const AddVolunteer = () => {
   const [image, setImage] = useState(null);
-  const [faculty, setFaculty] = useState({
+  const [volunteer, setvolunteer] = useState({
     image: "",
-    lecturer: "",
-    about_faculty: "",
+    volunteer: "",
+    about_volunteer: "",
   });
 
   const imageHandler = (e) => {
     setImage(e.target.files[0]);
-    setFaculty({ ...faculty, image: e.target.files[0] });
+    setvolunteer({ ... volunteer, image: e.target.files[0] });
   };
 
   const changeHandler = (e) => {
-    setFaculty({ ...faculty, [e.target.name]: e.target.value });
+    setvolunteer({ ...volunteer, [e.target.name]: e.target.value });
   };
 
-  const addFaculty = async (e) => {
+  const addvolunteer = async (e) => {
     e.preventDefault();
-    console.log(faculty);
+    console.log(volunteer);
 
-    let facultyData = { ...faculty };
+    let volunteerData = { ...volunteer };
     let responseData;
     let formData = new FormData();
     formData.append('image', image);
@@ -39,42 +39,42 @@ const AddLecturer = () => {
     .then((data) => { responseData = data });
 
     if (responseData.success) {
-      facultyData.image = responseData.image_url;
+      volunteerData.image = responseData.image_url;
     }
 
-    console.log(facultyData);
-    await fetch('http://localhost:4000/addFaculty', {
+    console.log(volunteerData);
+    await fetch('http://localhost:4000/addvolunteer', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-type': 'application/json',
       },
-      body: JSON.stringify(facultyData)
+      body: JSON.stringify(volunteerData)
     })
     .then((resp) => resp.json())
     .then((data) => {
-      data.success ? alert("Faculty Added!") : alert("Failed!");
+      data.success ? alert("volunteer Added!") : alert("Failed!");
     });
   };
 
   return (
     <div className="add-product-container">
       <h1 className="heading">Fill the Below Fields</h1>
-      <form className="add-product-form" onSubmit={addFaculty}>
+      <form className="add-product-form" onSubmit={addvolunteer}>
         <input
           type="text"
-          name="lecturer"
-          placeholder="Lecturer's Name"
+          name="volunteer"
+          placeholder="Volunteer's Name"
           className="input-field"
-          value={faculty.lecturer}
+          value={volunteer.volunteer}
           onChange={changeHandler}
         />
         <input
           type="text"
-          name="about_faculty"
-          placeholder="About Lecturer"
+          name="about_volunteer"
+          placeholder="About Volunteer"
           className="input-field"
-          value={faculty.about_faculty}
+          value={volunteer.about_volunteer}
           onChange={changeHandler}
         />
         <label htmlFor="faculty-image" className="custom-file-upload">
@@ -88,10 +88,10 @@ const AddLecturer = () => {
           name="image"
           onChange={imageHandler}
         />
-        <button type="submit" className="submit-button">Add Faculty</button>
+        <button type="submit" className="submit-button">Add Volunteer</button>
       </form>
     </div>
   );
 };
 
-export default AddLecturer;
+export default AddVolunteer;

@@ -1,15 +1,15 @@
 import {React, useState, useEffect} from 'react'
-import './LecturerList.css';
+import './VolunteerList.css';
 import cross_icon from '../assets/cart_cross_icon.png'
 
-const LecturerList = () => {
-  const [allfaculties, setallfaculties] = useState([]);
+const VolunteerList = () => {
+  const [allvolunteer, setallvolunteer] = useState([]);
 
   const fetchInfo = async () => {
-    await fetch('http://localhost:4000/allFaculties')
+    await fetch('http://localhost:4000/allvolunteers')
       .then((res) => res.json())
       .then((data) => {
-        setallfaculties(data);
+        setallvolunteer(data);
       });
   }
 
@@ -18,7 +18,7 @@ const LecturerList = () => {
   }, []);
 
   const handleRemove = async (id) => {
-              await fetch('http://localhost:4000/removefaculty',{
+              await fetch('http://localhost:4000/removevolunteer',{
                 method: 'POST',
                 headers:{
                   Accept:'application/json',
@@ -39,13 +39,13 @@ const LecturerList = () => {
       </div>
       <div className="faculty-product-main">
         <hr />
-        {allfaculties.map((faculty, index) => {
+        {allvolunteer.map((volunteer, index) => {
           return (
             <div key={index} className="faculty-product-format-main faculty-product-format">
-              <p>{faculty.lecturer}</p>
-              <img src={faculty.image} alt="not found" />
-               <p>{faculty.about_faculty}</p> 
-               <button onClick={() => handleRemove(faculty.id)}>
+              <p>{volunteer.volunteer}</p>
+              <img src={volunteer.image} alt="not found" />
+               <p>{volunteer.about_volunteer}</p> 
+               <button onClick={() => handleRemove(volunteer.id)}>
                 <img src={cross_icon} alt="Remove" />
               </button>
             </div>
@@ -56,4 +56,4 @@ const LecturerList = () => {
   )
 }
 
-export default LecturerList
+export default VolunteerList

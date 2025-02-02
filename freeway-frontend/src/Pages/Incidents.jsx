@@ -3,15 +3,15 @@ import './CSS/Courses.css';
 import Item from '../Components/Item/Item'
 import { ShopContext } from '../Context/ShopContext'
 
-const Courses = () => {
-  // Access all_products from the context
-  const { all_products } = useContext(ShopContext);
-  console.log(all_products)
+const Incidents = () => {
+
+  const { allincidents } = useContext(ShopContext);
+  console.log(allincidents)
 
   return (
     <div className="courses-container">
-      {all_products && all_products.length > 0 ? (
-        all_products.map((product) => (
+      {allincidents && allincidents.length > 0 ? (
+        allincidents.map((product) => (
           <Item
             key={product.id}
             id={product.id}
@@ -19,9 +19,8 @@ const Courses = () => {
             image={product.image}
             category={product.category}
             sub_category={product.sub_category}
-            lecturer={product.lecturer}
-            new_price={product.new_price}
-            old_price={product.old_price}
+            date={product.date}
+            time={product.time}
           />
         ))
       ) : (
@@ -31,5 +30,5 @@ const Courses = () => {
   );
 };
 
-export default Courses;
+export default Incidents;
 

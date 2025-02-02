@@ -4,7 +4,7 @@ import { ShopContext } from '../Context/ShopContext'
 import Item from '../Components/Item/Item'
 
 const ShopCategory = (props) => {
-  const {all_products} = useContext(ShopContext)
+  const {allincidents} = useContext(ShopContext)
   return (
     <div className='ShopCategory'>
         <div className="ShopCategory_index_sort">
@@ -12,7 +12,7 @@ const ShopCategory = (props) => {
         </div>
        
         <div className="ShopCategory_products">
-          {all_products.map((item,i) => {
+          {allincidents.map((item,i) => {
             if(props.category===item.category){
               return <Item key={item.id}
               id={item.id}
@@ -20,9 +20,9 @@ const ShopCategory = (props) => {
               image={item.image}
               category={item.category}
               sub_category={item.sub_category}
-              lecturer={item.lecturer}
-              new_price={item.new_price}
-              old_price={item.old_price}/>
+              date={item.date}
+              time={item.time}
+             />
             }
             else{return null}            
           }

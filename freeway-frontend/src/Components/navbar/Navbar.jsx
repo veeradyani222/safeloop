@@ -1,17 +1,16 @@
 import React, { useContext , useState} from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom'; 
-import cart_icon from '../assets/cart_icon.png';
 import logo from '../assets/logo.png';
-import { ShopContext } from '../../Context/ShopContext'; 
+// import { ShopContext } from '../../Context/ShopContext'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const [menu, setmenu] = useState("Home");
-  const { getTotalCartCount ,  getTotalWishlistCount } = useContext(ShopContext); 
-  const totalCartItems = getTotalCartCount();
-  const totalWishlistItems =  getTotalWishlistCount();
+  // const { getTotalCartCount ,  getTotalWishlistCount } = useContext(ShopContext); 
+  // const totalCartItems = getTotalCartCount();
+  // const totalWishlistItems =  getTotalWishlistCount();
 
   return (
     <div>
@@ -35,41 +34,34 @@ const Navbar = () => {
         <Link to="/About">About Us</Link>
     </li>
     <li 
-        onClick={() => { setmenu("Courses") }} 
-        className={menu === "Courses" ? "highlighted" : ""}
+        onClick={() => { setmenu("Incidents") }} 
+        className={menu === "Incidents" ? "highlighted" : ""}
     >
-        <Link to="/Courses">Courses</Link>
+        <Link to="/Incidents">Incidents</Link>
     </li>
+
     <li 
-        onClick={() => { setmenu("Categories") }} 
-        className={menu === "Categories" ? "highlighted" : ""}
+        onClick={() => { setmenu("Raise An Issue") }} 
+        className={menu === "Raise An Issue" ? "highlighted" : ""}
     >
-        <Link to="/Categories">Categories</Link>
+        <Link to="/Raise-an-Issue">Raise An Issue</Link>
     </li>
-    <li 
-        onClick={() => { setmenu("Terms of Use") }} 
-        className={menu === "Terms of Use" ? "highlighted" : ""}
-    >
-        <Link to="/Terms">Terms of Use</Link>
-    </li>
-    <li 
-        onClick={() => { setmenu("FAQ") }} 
-        className={menu === "FAQ" ? "highlighted" : ""}
-    >
-        <Link to="/FAQ">FAQ</Link>
-    </li>
+   
     <li 
         onClick={() => { setmenu("Contact Us") }} 
         className={menu === "Contact Us" ? "highlighted" : ""}
     >
         <Link to="/ContactUs">Contact Us</Link>
     </li>
+ 
+
     <li 
-        onClick={() => { setmenu("Offline Orders") }} 
-        className={menu === "Offline Orders" ? "highlighted" : ""}
+        onClick={() => { setmenu("View Analytics") }} 
+        className={menu === "View Analytics" ? "highlighted" : ""}
     >
-        <Link to="/OfflineOrders">Offline Orders</Link>
+        <Link to="/ViewAnalytics">View Analytics</Link>
     </li>
+
 </div>
 <div className="login-profile">
     {localStorage.getItem('auth-token') ? 
@@ -80,7 +72,7 @@ const Navbar = () => {
         </Link>
     }
 
-<Link to="/wishlist">
+{/* <Link to="/wishlist">
             <div className="cart">
               <div className="cart-number">{totalWishlistItems}</div>
               <li className='wishlist'>
@@ -89,8 +81,8 @@ const Navbar = () => {
               />
               </li> 
             </div>
-          </Link>
-
+          </Link> */}
+{/* 
           <Link to="/cart">
             <div className="cart">
               <div className="cart-number">{totalCartItems}</div>
@@ -98,7 +90,7 @@ const Navbar = () => {
                 <img src={cart_icon} alt="" />
               </li> 
             </div>
-          </Link>
+          </Link> */}
         </div>
       </nav>
 

@@ -1,21 +1,25 @@
 import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import './ProductDisplay.css';
 import { ShopContext } from '../../Context/ShopContext';
 
-const ProductDisplay = (props) => {
-  const { product } = props;
-  const { addToCart, isItemInCart } = useContext(ShopContext);
+const ProductDisplay = () => {
+  const { id } = useParams();
+  const { allincidents } = useContext(ShopContext);
 
-  const buttonText = isItemInCart(product.id) ? 'Added!' : 'Add to Cart';
+  if (!allincidents) {
+    return <p>Loading incidents...</p>; // Or any other loading message or component
+  }
+
+  const product = allincidents.find(p => p.id === parseInt(id));
+
+  if (!product) {
+    return <p>Incident not found</p>;
+  }
 
   return (
     <div className="product-display">
       <div className="image-gallery">
-        <div className="thumbnail-images">
-          <img src={product.image} alt="Product Image 1" className="thumbnail-image" />
-          <img src={product.image} alt="Product Image 2" className="thumbnail-image" />
-          <img src={product.image} alt="Product Image 3" className="thumbnail-image" />
-        </div>
         <div className="main-image">
           <img src={product.image} alt="Main Product Image" className="main-product-image" />
         </div>
@@ -24,13 +28,7 @@ const ProductDisplay = (props) => {
       <div className="product-details">
         <h1 className="product-name">{product.name}</h1>
         <p className="product-description">{product.description}</p>
-        <div className="price-section">
-          <span className="new-price">${product.new_price}</span>
-          <span className="old-price">${product.old_price}</span>
-        </div>
-        <button onClick={() => addToCart(product.id)} className="add-to-cart-button">
-          {buttonText}
-        </button>
+      
       </div>
     </div>
   );

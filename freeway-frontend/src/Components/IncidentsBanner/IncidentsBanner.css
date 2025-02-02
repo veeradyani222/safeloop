@@ -1,0 +1,52 @@
+.incidents-banner{
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+}
+.heading{
+  
+  justify-content: center;
+  align-items: end;
+  font-family: "poppins" , serif;
+  font-size: 5vh;
+  font-weight: 700;
+  text-align: center;
+  
+}
+.categories {
+  margin-top: 10vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates 4 equal columns */
+  gap: 20px;
+  padding: 20px;
+  place-items: center;
+  }
+  
+  .categories li {
+    list-style: none;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 150px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* Applying Poppins font */
+    font-size: 24px; /* Larger font size */
+    color: #333; /* Dark font color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease; /* Smooth transition for hover effects */
+    cursor: pointer;
+}
+
+.categories li:hover {
+    background: linear-gradient(135deg, #ff6f61, #ffca28); /* Gradient background on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+    color: #fff; /* Change font color to white on hover */
+}
+  
+  /* Optional: Add some font styling for the text inside the boxes */
+  .categories li {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+  }
+  

@@ -2,13 +2,15 @@ import React from 'react'
 
 import './CSS/Home.css'
 import Sliders from '../Components/Sliders/Sliders'
-import Categories from '../Components/Categories/Categories'
+import IncidentsBanner from '../Components/IncidentsBanner/IncidentsBanner'
+import VolunteerPage from '../Components/VolunteerPage/VolunteerPage'
 const Home = () => {
 
   return (
     <div>
        <Sliders/>
-       <Categories/>
+       <IncidentsBanner/>
+       <VolunteerPage/>
     </div>
   )
 }
