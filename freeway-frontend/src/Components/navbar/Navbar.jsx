@@ -1,20 +1,30 @@
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import './Navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { ShopContext } from '../../Context/ShopContext';
+import Search from './../Search/Search';
+import cart_icon from '../assets/cart_icon.png';
+import remove_icon from '../assets/remove.png';
+import search_icon from '../assets/search-new.png';
+import hamburger_icon from '../assets/hamburger-new.png';
+import heart_icon from '../assets/heart_icon.png';
 import user_icon from '../assets/profile-new.png';
 import logo from '../assets/logo.png';
-import { FaBars, FaTimes} from 'react-icons/fa';
+import { FaBars, FaTimes, FaSearch } from 'react-icons/fa';
 
 const Navbar = () => {
   const [menu, setMenu] = useState("Home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isHelpDropdownOpen, setIsHelpDropdownOpen] = useState(false);
   const [isPolicyDropdownOpen, setIsPolicyDropdownOpen] = useState(false);
-
-
+  const { getTotalCartCount, getTotalWishlistCount } = useContext(ShopContext);
+  const totalCartItems = getTotalCartCount();
+  const totalWishlistItems = getTotalWishlistCount();
   const navigate = useNavigate();
 
+  const searchBarRef = useRef(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -47,7 +57,19 @@ const Navbar = () => {
     navigate(route); // Navigate to the selected route
   };
 
-  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setIsSearchVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [searchBarRef]);
 
   const handleLogout = () => {
     localStorage.removeItem('auth-token');
@@ -74,7 +96,9 @@ const Navbar = () => {
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </div>
 
+          <div className="search-icon" onClick={() => setIsSearchVisible(!isSearchVisible)}>
 
+          </div>
         </div>
 
 <div className={`nav-content ${isMenuOpen ? 'show-menu' : ''}`}>
@@ -172,16 +196,44 @@ const Navbar = () => {
     </li>
   </div>
 
+  {/* Wishlist Section */}
+  <div className="cart" onClick={() => checkAuthentication('/wishlist')}>
+    <div className="cart-wishlist-number">{totalWishlistItems}</div>
+    <li className="wishlist">
+      <img src={heart_icon} alt="Wishlist" />
+    </li>
+  </div>
 
+  {/* Shopping Cart Section */}
+  <div className="cart shopcart" onClick={() => checkAuthentication('/cart')}>
+    <div className="cart-cart-number">{totalCartItems}</div>
+    <li className="cart shopcart">
+      <img src={cart_icon} alt="Cart" />
+    </li>
+  </div>
 
+  {/* Search Icon */}
+  <div className="search-icon" onClick={() => setIsSearchVisible(!isSearchVisible)}>
+    <img src={search_icon} alt="search" />
+  </div>
 
+  <div className="hamburger-menu" onClick={toggleMenu}>
+    {isMenuOpen ? <img src={remove_icon} alt="search" /> : <img src={hamburger_icon} alt="search" /> }
+  </div>
   </div>
   {/* Search Bar (conditionally displayed) */}
-
-</div>
+<div className="visible-search">{isSearchVisible && (
+  <div className="search-bar1" ref={searchBarRef}>
+    <Search onProductSelect={() => setIsSearchVisible(false)} />
+  </div>
+)}</div>
   
 </div>
 
+
+
+
+    </div>
 
     
   );
